@@ -17,7 +17,7 @@
     "configuration",
     "file",
     "json",
-    "pug"
+    "handlebars"
   ],
   "author": "Aki Mäkinen",
   "license": "MIT",
