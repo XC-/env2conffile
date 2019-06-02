@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/XC-/env2conffile/compare/v1.1.1...v1.1.2) (2019-06-02)
+
+
+### Bug Fixes
+
+* **package.json:** Fix package keywords ([b6021ca](https://github.com/XC-/env2conffile/commit/b6021ca))
+
 ## [1.1.1](https://github.com/XC-/env2conffile/compare/v1.1.0...v1.1.1) (2019-06-02)
 
 
