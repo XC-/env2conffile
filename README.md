@@ -10,21 +10,24 @@ env2conffile (name pending): Create a configuration file from env variables
 Command line parameters:
 ```
 output:
-    description: Output target.
-    possible values: file, stdout, stderr
-    default value: stdout
+    Description: Output target.
+    Possible values: file, stdout, stderr
+    Default value: stdout
 outputFile:
-    description: Filename and path of the file when using file output.
+    Description: Filename and path of the file when using file output.
 renderer:
-    description: Renderer used to format the configuration.
-    possible values: json, yaml, handlebars
-    default value: json
+    Description: Renderer used to format the configuration.
+    Possible values: json, yaml, handlebars
+    Default value: json
 template:
-    description: Filename and path of the Handlebars template file.
+    Description: Filename and path of the Handlebars template file.
 varPrefix:
-    description: Variable prefix used to filter the environment variables.
+    Description: Variable prefix used to filter the environment variables.
 varSuffix:
-    description: Variable suffix used to filter the environment variables.
+    Description: Variable suffix used to filter the environment variables.
+doNotStrip:
+    Description: Do not strip prefix and suffix from the environment variable.
+    Default value: false
 ```
 
 Following examples assume that the package is installed globally.
