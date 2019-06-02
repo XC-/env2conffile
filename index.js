@@ -10,7 +10,7 @@ const DEFAULTS = {
   renderer: "json",
   varPrefix: "",
   varSuffix: "",
-  doNotStrip: "false"
+  doNotStrip: false
 };
 
 const HELP = {
@@ -49,7 +49,7 @@ function outputHelp() {
     if (HELP[key].values) {
       console.log(`    Possible values: ${HELP[key].values.join(", ")}`);
     }
-    if (DEFAULTS[key]) {
+    if (JSON.stringify(DEFAULTS[key])) {
       console.log(`    Default value: ${DEFAULTS[key]}`);
     }
   })
