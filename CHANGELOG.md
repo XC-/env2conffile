@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/XC-/env2conffile/compare/v1.0.1...v1.1.0) (2019-06-02)
+
+
+### Bug Fixes
+
+* **Help:** Update help to match the latest changes ([c0ac0db](https://github.com/XC-/env2conffile/commit/c0ac0db))
+* **README:** Improve README ([ac828d3](https://github.com/XC-/env2conffile/commit/ac828d3))
+
+
+### Features
+
+* **Generate:** Add option to prevent prefix and suffix stripping from the var name ([43cd082](https://github.com/XC-/env2conffile/commit/43cd082))
+
 ## [1.0.1](https://github.com/XC-/env2conffile/compare/v1.0.0...v1.0.1) (2019-06-02)
 
 
