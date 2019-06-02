@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/XC-/env2conffile.git"
+    "url": "ssh://git@github.com/XC-/env2conffile.git"
   },
   "keywords": [
     "CI",
