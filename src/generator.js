@@ -11,7 +11,7 @@ const errors = {
   "NO_TEMPLATE": 4
 };
 
-function Generate({output, outputFile, renderer, template, varPrefix, varSuffix, env, debug}) {
+function Generate({output, outputFile, renderer, template, varPrefix, varSuffix, doNotStrip, env, debug}) {
 
   const outputs = {
     file: (rendered) => fs.writeFileSync(outputFile, rendered, "utf-8"),
@@ -54,7 +54,13 @@ function Generate({output, outputFile, renderer, template, varPrefix, varSuffix,
   Object.keys(env)
     .filter((key) => varPrefix ? key.startsWith(varPrefix) : true)
     .filter((key) => varSuffix ? key.endsWith(varSuffix) : true)
-    .forEach((key) => filteredEnv[key.replace(new RegExp("^" + varPrefix), "").replace(new RegExp(varSuffix + "$"), "")] = env[key]);
+    .forEach((key) => {
+      let outputKey = key;
+      if (!doNotStrip) {
+        outputKey = key.replace(new RegExp("^" + varPrefix), "").replace(new RegExp(varSuffix + "$"), "");
+      }
+      filteredEnv[outputKey] = env[key]
+    });
 
   if (debug) console.debug("Renderer context: ", JSON.stringify(filteredEnv, null, DEFAULT_JSON_INDENT));
 
