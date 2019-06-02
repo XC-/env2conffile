@@ -1,0 +1,33 @@
+{
+  "name": "env2conffile",
+  "version": "0.0.1",
+  "description": "env2conffile (name pending): Create configuration file from environment variables",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XC-/env2conffile.git"
+  },
+  "keywords": [
+    "CI",
+    "environment",
+    "variables",
+    "configuration",
+    "file",
+    "json",
+    "pug"
+  ],
+  "author": "Aki Mäkinen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/XC-/env2conffile/issues"
+  },
+  "homepage": "https://github.com/XC-/env2conffile#readme",
+  "dependencies": {
+    "handlebars": "^4.1.2",
+    "minimist": "^1.2.0",
+    "yaml": "^1.6.0"
+  }
+}
