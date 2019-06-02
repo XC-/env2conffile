@@ -9,7 +9,8 @@ const DEFAULTS = {
   output: "stdout",
   renderer: "json",
   varPrefix: "",
-  varSuffix: ""
+  varSuffix: "",
+  doNotStrip: "false"
 };
 
 const HELP = {
@@ -32,6 +33,9 @@ const HELP = {
   },
   varSuffix: {
     description: "Variable suffix used to filter the environment variables."
+  },
+  doNotStrip: {
+    description: "Do not strip prefix and suffix from the environment variable."
   }
 };
 
@@ -41,12 +45,12 @@ function outputHelp() {
   console.log(`${pkgJson.name} version ${pkgJson.version} command line parameters:\n`);
   Object.keys(HELP).forEach((key) => {
     console.log(`${key}:`);
-    console.log(`    description: ${HELP[key].description}`);
+    console.log(`    Description: ${HELP[key].description}`);
     if (HELP[key].values) {
-      console.log(`    possible values: ${HELP[key].values.join(", ")}`);
+      console.log(`    Possible values: ${HELP[key].values.join(", ")}`);
     }
     if (DEFAULTS[key]) {
-      console.log(`    default value: ${DEFAULTS[key]}`);
+      console.log(`    Default value: ${DEFAULTS[key]}`);
     }
   })
 }
