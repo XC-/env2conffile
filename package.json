@@ -36,5 +36,8 @@
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "bin": {
+    "env2conffile": "./index.js"
+  }
 }
