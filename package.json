@@ -29,5 +29,12 @@
     "handlebars": "^4.1.2",
     "minimist": "^1.2.0",
     "yaml": "^1.6.0"
-  }
+  },
+  "files": [
+    "src/**/*",
+    "index.js",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ]
 }
