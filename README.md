@@ -1,6 +1,18 @@
 # env2conffile
 env2conffile (name pending): Create a configuration file from env variables
 
+# Why
+
+Why indeed. This little script was inspired by Gitlab CI and outside of CI/CD, there might not be too much use for this.
+In CI/CD pipelines it is sometimes useful to generate configuration files depending on the target environment and sometimes
+using tools such as Ansible or Terraform can be overkill if the intention is to just generate simple files. Since most of the
+information is relayed via environment variables, templating and/or automatic creation of the said configuration files is a 
+tempting option.
+
+This little script does just that. In CI environment one can define variables for example `PRODUCTION_DOMAIN` or `STAGING_DOMAIN`
+and this script does the rest so that just the `DOMAIN` part ends up in the configuration file. At simplest the files are
+plain JSON or YAML, but can be more complex. For that use case this tool supports [Handlebars](https://handlebarsjs.com/) templates.
+
 # Installation
 
 `npm install -g env2conffile` for global install or `npm install env2conffile` for local.
