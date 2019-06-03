@@ -19,7 +19,7 @@ const HELP = {
     values: ["file", "stdout", "stderr"]
   },
   outputFile: {
-    description: "Filename and path of the file when using file output."
+    description: "Filename and path of the file when using file output. Sets '--output file' automatically."
   },
   renderer: {
     description: "Renderer used to format the configuration.",
@@ -63,6 +63,9 @@ function outputVersion() {
 if (!module.parent) {
   const args = process.argv.slice(2);
   const opts = minimist(args, { default: DEFAULTS, alias: { h: "help", v: "version", d: "debug" } });
+
+  if (opts.debug) console.debug("Raw command line arguments: ", JSON.stringify(opts, null, 2));
+
   if (opts.help) {
     outputHelp();
     process.exit(0);
@@ -73,6 +76,9 @@ if (!module.parent) {
     process.exit(0);
   }
 
-  if (opts.debug) console.debug("Command line arguments: ", JSON.stringify(opts, null, 2));
+  if (opts.outputFile) opts.output = "file";
+
+  if (opts.debug) console.debug("Options: ", JSON.stringify(opts, null, 2));
+
   Generate(opts);
 }
