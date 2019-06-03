@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/XC-/env2conffile/compare/v1.1.2...v1.2.0) (2019-06-03)
+
+
+### Features
+
+* **CLI:** Imply '--output file' when defining --outputFile ([204a8fd](https://github.com/XC-/env2conffile/commit/204a8fd))
+
 ## [1.1.2](https://github.com/XC-/env2conffile/compare/v1.1.1...v1.1.2) (2019-06-02)
 
 
