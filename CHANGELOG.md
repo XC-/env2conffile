@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/XC-/env2conffile/compare/v1.3.0...v1.3.1) (2019-06-10)
+
+
+### Bug Fixes
+
+* **README:** Add corrections and adjustments to README ([ff07858](https://github.com/XC-/env2conffile/commit/ff07858))
+
 # [1.3.0](https://github.com/XC-/env2conffile/compare/v1.2.0...v1.3.0) (2019-06-10)
 
 
