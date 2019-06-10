@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/XC-/env2conffile/compare/v1.2.0...v1.3.0) (2019-06-10)
+
+
+### Features
+
+* **CLI:** Support for env files. Support for configuration file. ([d399468](https://github.com/XC-/env2conffile/commit/d399468))
+* **Generate:** Support for .env file ([c860bb1](https://github.com/XC-/env2conffile/commit/c860bb1))
+
 # [1.2.0](https://github.com/XC-/env2conffile/compare/v1.1.2...v1.2.0) (2019-06-03)
 
 
