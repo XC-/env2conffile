@@ -19,6 +19,10 @@ plain JSON or YAML, but can be more complex. For that use case this tool support
 
 # Usage
 
+## Notice
+
+Currently, by default, the tool assumes that all the files are encoded with UTF-8. Support for other character encodings is coming up!
+
 ### Command line parameters:
 ```
 envFile:
@@ -52,7 +56,8 @@ debug:
 
 Now a configuration file can be used to configure the... configuration file creating tool (I honestly did not realize how
 meta this is until writing this down :D ). The configuration file is named `.e2crc` and must be placed to the working directory.
-The order of evaluation for configuration is: 1. Defaults, 2. `.e2crc` 3. CLI arguments.
+The order of evaluation for configuration is: 1. Defaults, 2. `.e2crc` 3. CLI arguments. The configuration file uses JSON
+format and the options are the same as when used via CLI (e.g. `"envFile": "./.myenv"` or `"debug": true`).
 
 
 ### .env file
