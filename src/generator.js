@@ -1,4 +1,6 @@
 const fs = require("fs");
+const path = require("path");
+
 const YAML = require("yaml");
 const handlebars = require("handlebars");
 
@@ -10,8 +12,17 @@ const errors = {
   "NO_OUTPUT_FILE": 3,
   "NO_TEMPLATE": 4
 };
+const LINE_END_RE = /\r\n|\n/;
 
-function Generate({output, outputFile, renderer, template, varPrefix, varSuffix, doNotStrip, env, debug}) {
+const ENVFILE_COMMENT_CHAR = "#";
+const ENVFILE_VAR_SEPARATOR = "=";
+const DEFAULT_ENV_FILE = path.join(process.cwd(), ".env");
+
+function jsonPrettyPrint(msg, j) {
+  console.log(msg, JSON.stringify(j, null, DEFAULT_JSON_INDENT));
+}
+
+function Generate({output, outputFile, renderer, template, varPrefix, varSuffix, doNotStrip, envFile, env, debug}) {
 
   const outputs = {
     file: (rendered) => fs.writeFileSync(outputFile, rendered, "utf-8"),
@@ -49,7 +60,6 @@ function Generate({output, outputFile, renderer, template, varPrefix, varSuffix,
     console.log("Using process environment...");
     env = process.env;
   }
-
   const filteredEnv = {};
   Object.keys(env)
     .filter((key) => varPrefix ? key.startsWith(varPrefix) : true)
@@ -62,9 +72,31 @@ function Generate({output, outputFile, renderer, template, varPrefix, varSuffix,
       filteredEnv[outputKey] = env[key]
     });
 
-  if (debug) console.debug("Renderer context: ", JSON.stringify(filteredEnv, null, DEFAULT_JSON_INDENT));
+  if (debug) jsonPrettyPrint("Renderer context before envFile: ", filteredEnv);
 
-  outputs[output](renderers[renderer](filteredEnv));
+  let envFromFile = {};
+  try {
+    fs.readFileSync(envFile ? envFile : DEFAULT_ENV_FILE, "utf-8")
+      .split(LINE_END_RE)
+      .map((line) => line.trim())
+      .filter((line) => !!line)
+      .filter((line) => !line.startsWith(ENVFILE_COMMENT_CHAR))
+      .map((line) => {
+        let parts = line.split(ENVFILE_VAR_SEPARATOR);
+        return [parts[0], parts.slice(1).join(ENVFILE_VAR_SEPARATOR)];
+      })
+      .forEach((pair) => envFromFile[pair[0]] = pair[1]);
+      if (debug) jsonPrettyPrint("Variables from envFile: ", envFromFile);
+  } catch (e) {
+    if (debug) console.error(e);
+    console.log("No environment file found. Continuing without");
+  }
+
+  const finalEnv = Object.assign({}, filteredEnv, envFromFile);
+
+  if (debug) jsonPrettyPrint("Combined env: ", finalEnv);
+
+  outputs[output](renderers[renderer](finalEnv));
 }
 
 module.exports = {
