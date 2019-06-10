@@ -19,14 +19,16 @@ plain JSON or YAML, but can be more complex. For that use case this tool support
 
 # Usage
 
-Command line parameters:
+### Command line parameters:
 ```
+envFile:
+    Description: Variable file (dotenv-like). Used for additional variables and is applied AFTER filtering with varPrefix and varSuffix
 output:
     Description: Output target.
     Possible values: file, stdout, stderr
     Default value: stdout
 outputFile:
-    Description: Filename and path of the file when using file output.
+    Description: Filename and path of the file when using file output. Sets '--output file' automatically.
 renderer:
     Description: Renderer used to format the configuration.
     Possible values: json, yaml, handlebars
@@ -35,12 +37,32 @@ template:
     Description: Filename and path of the Handlebars template file.
 varPrefix:
     Description: Variable prefix used to filter the environment variables.
+    Default value: 
 varSuffix:
     Description: Variable suffix used to filter the environment variables.
+    Default value: 
 doNotStrip:
     Description: Do not strip prefix and suffix from the environment variable.
     Default value: false
+debug:
+    Description: Show debug prints.
 ```
+
+### Configuration file
+
+Now a configuration file can be used to configure the... configuration file creating tool (I honestly did not realize how
+meta this is until writing this down :D ). The configuration file is named `.e2crc` and must be placed to the working directory.
+The order of evaluation for configuration is: 1. Defaults, 2. `.e2crc` 3. CLI arguments.
+
+
+### .env file
+
+env2conffile supports now dotenv-like `.env` file. By this I mean that just like with dotenv, the file is placed to the
+working directory and variables are defined `<KEY>=<VALUE>`, the formatting done to the variables, however, does differentiate
+from dotenv. This means that while comments (lines starting with #) are supported, features like quote conversion and multiline
+are missing. While it is not guaranteed that at some point down the line the tool would have full dotenv file support, it is
+also not guaranteed that it will happen, only time will tell. 
+
 
 Following examples assume that the package is installed globally.
 
