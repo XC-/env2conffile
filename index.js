@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 
+const fs = require("fs");
 const path = require("path");
 const minimist = require("minimist");
 
 const { Generate } = require("./src/generator");
+
+const CONFIGURATION_FILE = ".e2crc";
+
+const DEFAULT_ENV_FILE = path.join(process.cwd(), ".env");
 
 const DEFAULTS = {
   output: "stdout",
@@ -14,6 +19,9 @@ const DEFAULTS = {
 };
 
 const HELP = {
+  envFile: {
+    description: "Variable file (dotenv-like). Used for additional variables and is applied AFTER filtering with varPrefix and varSuffix"
+  },
   output: {
     description: "Output target.",
     values: ["file", "stdout", "stderr"]
@@ -36,6 +44,9 @@ const HELP = {
   },
   doNotStrip: {
     description: "Do not strip prefix and suffix from the environment variable."
+  },
+  debug: {
+    description: "Show debug prints."
   }
 };
 
@@ -59,11 +70,18 @@ function outputVersion() {
     console.log(`${pkgJson.name} ${pkgJson.version}`);
 }
 
-
 if (!module.parent) {
   const args = process.argv.slice(2);
-  const opts = minimist(args, { default: DEFAULTS, alias: { h: "help", v: "version", d: "debug" } });
+  let optsFromFile;
+  try {
+    const rawConfFromFile = fs.readFileSync(path.join(process.cwd(), CONFIGURATION_FILE));
+    optsFromFile = JSON.parse(rawConfFromFile);
+  } catch(e) {
+    // pass
+  }
+  const optsFromLine = minimist(args, { alias: { h: "help", v: "version", d: "debug" } });
 
+  const opts = Object.assign({}, DEFAULTS, optsFromFile, optsFromLine);
   if (opts.debug) console.debug("Raw command line arguments: ", JSON.stringify(opts, null, 2));
 
   if (opts.help) {
@@ -77,6 +95,10 @@ if (!module.parent) {
   }
 
   if (opts.outputFile) opts.output = "file";
+
+  if (!opts.envFile) {
+    if (fs.existsSync(DEFAULT_ENV_FILE)) opts.envFile = DEFAULT_ENV_FILE;
+  }
 
   if (opts.debug) console.debug("Options: ", JSON.stringify(opts, null, 2));
 

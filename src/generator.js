@@ -1,5 +1,4 @@
 const fs = require("fs");
-const path = require("path");
 
 const YAML = require("yaml");
 const handlebars = require("handlebars");
@@ -16,7 +15,6 @@ const LINE_END_RE = /\r\n|\n/;
 
 const ENVFILE_COMMENT_CHAR = "#";
 const ENVFILE_VAR_SEPARATOR = "=";
-const DEFAULT_ENV_FILE = path.join(process.cwd(), ".env");
 
 function jsonPrettyPrint(msg, j) {
   console.log(msg, JSON.stringify(j, null, DEFAULT_JSON_INDENT));
@@ -75,8 +73,8 @@ function Generate({output, outputFile, renderer, template, varPrefix, varSuffix,
   if (debug) jsonPrettyPrint("Renderer context before envFile: ", filteredEnv);
 
   let envFromFile = {};
-  try {
-    fs.readFileSync(envFile ? envFile : DEFAULT_ENV_FILE, "utf-8")
+  if (envFile) {
+    fs.readFileSync(envFile, "utf-8")
       .split(LINE_END_RE)
       .map((line) => line.trim())
       .filter((line) => !!line)
@@ -86,10 +84,8 @@ function Generate({output, outputFile, renderer, template, varPrefix, varSuffix,
         return [parts[0], parts.slice(1).join(ENVFILE_VAR_SEPARATOR)];
       })
       .forEach((pair) => envFromFile[pair[0]] = pair[1]);
+
       if (debug) jsonPrettyPrint("Variables from envFile: ", envFromFile);
-  } catch (e) {
-    if (debug) console.error(e);
-    console.log("No environment file found. Continuing without");
   }
 
   const finalEnv = Object.assign({}, filteredEnv, envFromFile);
