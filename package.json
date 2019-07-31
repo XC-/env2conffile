@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dummy-tests": "echo 'Running dummy tests!'",
-    "tests": "echo 'Running actual tests!'"
+    "tests": "npx mocha"
   },
   "repository": {
     "type": "git",
@@ -40,5 +40,9 @@
   ],
   "bin": {
     "env2conffile": "./index.js"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
   }
 }
