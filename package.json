@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dummy-tests": "echo 'Running dummy tests!'",
-    "tests": "npx mocha"
+    "tests": "npx mocha --reporter mocha-junit-reporter"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.0"
+    "mocha": "^6.2.0",
+    "mocha-junit-reporter": "^1.23.1"
   }
 }
