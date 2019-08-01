@@ -20,4 +20,9 @@ echo $RANDOM >> my-dummy-artifact.txt'''
       }
     }
   }
+  post {
+    always {
+      junit './test-results.xml'
+    }
+  }
 }
