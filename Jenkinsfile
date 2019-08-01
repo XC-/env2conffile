@@ -10,12 +10,14 @@ pipeline {
     stage('Test') {
       steps {
         sh '''ls -la
-npm run tests'''
+npm run tests
+ls -la'''
       }
     }
     stage('"Build"') {
       steps {
-        sh '''if [ "$RANDOM % 10" -gt "5" ]; then echo "false" && false; fi
+        sh '''ls -la
+if [ "shuf -i 1-10 -n )" -gt "5" ]; then echo "false" && false; fi
 echo $RANDOM >> my-dummy-artifact.txt'''
       }
     }
