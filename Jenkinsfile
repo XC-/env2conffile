@@ -14,8 +14,7 @@ npm run tests'''
     }
     stage('"Build"') {
       steps {
-        sh '''#!/bin/bash
-if [[ "$RANDOM % 10" -gt "5" ]]; then echo "false" && false; fi
+        sh '''if [ "$RANDOM % 10" -gt "5" ]; then echo "false" && false; fi
 echo $RANDOM >> my-dummy-artifact.txt'''
       }
     }
