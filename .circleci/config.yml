@@ -43,13 +43,13 @@ workflows:
     jobs:
       - build:
           filters:
-            branches:
-              - /ci\-.*/
+            branches: 
+              only: /ci\-.*/
       - test:
           requires: 
             - build
           filters: 
-            branches:
-              - /ci\-.*/
+            branches: 
+              only: /ci\-.*/
             
           
