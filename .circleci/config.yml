@@ -42,14 +42,14 @@ workflows:
   my-example-workflow:
     jobs:
       - build:
-        filters:
-          branches:
-            - ci-.*
+          filters:
+            branches:
+              - ci-.*
       - test:
-        requires: 
-          - build
-        filters: 
-          branches:
-            - ci-.*
+          requires: 
+            - build
+          filters: 
+            branches:
+              - ci-.*
             
           
