@@ -88,7 +88,7 @@ function Generate({output, outputFile, renderer, template, varPrefix, varSuffix,
       if (debug) jsonPrettyPrint("Variables from envFile: ", envFromFile);
   }
 
-  const finalEnv = Object.assign({}, filteredEnv, envFromFile);
+  const finalEnv = Object.assign({}, envFromFile, filteredEnv);
 
   if (debug) jsonPrettyPrint("Combined env: ", finalEnv);
 
