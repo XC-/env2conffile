@@ -24,6 +24,7 @@ plain JSON or YAML, but can be more complex. For that use case this tool support
 Currently, by default, the tool assumes that all the files are encoded with UTF-8. Support for other character encodings is coming up!
 
 ### Command line parameters:
+All begin with `--`, e.g. `--envFile`
 ```
 envFile:
     Description: Variable file (dotenv-like). Used for additional variables and is applied AFTER filtering with varPrefix and varSuffix
@@ -68,6 +69,7 @@ from dotenv. This means that while comments (lines starting with #) are supporte
 are missing. While it is not guaranteed that at some point down the line the tool would have full dotenv file support, it is
 also not guaranteed that it will happen, only time will tell. 
 
+By default, env2conffile will look for `.env` file, but this can be overridden either in the configuration file or on command line.
 
 Following examples assume that the package is installed globally.
 
@@ -78,6 +80,14 @@ Example using handlebars template:
 Example with default json output and stdout:
 
 `BAR_SOMETHING_ELSE_FOO=000 BAR_SOMETHING_FOO=123 BAR_SOME=456 SOME_FOO=789 env2conffile --varSuffix _FOO --varPrefix BAR_`
+
+### Evaluation order
+
+The evaluation order is:
+1. .env file
+2. environment variables
+
+This way the file can be used to set the default values which then can be overridden with environment variables.
 
 ## Notice
 
